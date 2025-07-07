@@ -1,0 +1,19 @@
+# Core data processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Computer vision and image processing
+opencv-python>=4.8.0
+
+# Deep learning and YOLO
+ultralytics>=8.0.0
+
+# Visualization (for notebooks)
+matplotlib>=3.6.0
+
+# Utility libraries
+tqdm>=4.65.0
+PyYAML>=6.0
+
+# Development tools
+pathlib2>=2.3.0

@@ -192,3 +192,17 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# Kaggle
+kaggle.json
+
+# Notebooks and System Files
+.ipynb_checkpoints/
+.DS_Store
+
+# dataset and YOLO training outputs
+/runs/
+/data/
+
+# conda
+environment.yml
