@@ -17,3 +17,5 @@ PyYAML>=6.0
 
 # Development tools
 pathlib2>=2.3.0
+
+gradio
