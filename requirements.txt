@@ -19,3 +19,4 @@ PyYAML>=6.0
 pathlib2>=2.3.0
 
 gradio
+scikit-learn
