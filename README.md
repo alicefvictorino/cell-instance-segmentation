@@ -58,7 +58,7 @@ cell-instance-segmentation/
 │   └── ...             # Images and visual assets for the README.
 ├── 📁 scripts/
 │   ├── preprocess.py   # Converts RLE annotations to YOLO format.
-│   ├── train.py        # Trains the YOLOv11 model.
+│   ├── train.py        # Trains the yolo11 model.
 │   └── analysis.py     # Performs morphometric analysis on segmented cells.
 ├── main_workflow_kaggle.ipynb  # The reproducible workflow for the pipeline.
 ├── requirements.txt      # Python dependencies for the project.
@@ -139,7 +139,7 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 -   **Sartorius - Cell Instance Segmentation (Kaggle Competition):**
     Howard, A., Chow, A., et al. (2021). *Sartorius - Cell Instance Segmentation*. Kaggle. Retrieved from https://kaggle.com/competitions/sartorius-cell-instance-segmentation
--   **Ultralytics YOLOv11 Documentation:**
+-   **Ultralytics yolo11 Documentation:**
     -   Models: https://docs.ultralytics.com/pt/models/yolo11/
     -   Segmentation Task: https://docs.ultralytics.com/pt/tasks/segment/#models
 

@@ -12,7 +12,7 @@ def calculate_morphometrics(result_object):
     """
     Calculates morphometric features from a YOLO result object.
 
-    This function takes the output of a YOLOv11-seg prediction, iterates through
+    This function takes the output of a yolo11-seg prediction, iterates through
     each detected mask, and computes key shape-based metrics using OpenCV.
 
     Args:
@@ -75,7 +75,7 @@ def main(args):
     Main function to orchestrate the morphometric analysis pipeline.
     
     This function coordinates the entire analysis process:
-    1. Loads the trained YOLOv11 model
+    1. Loads the trained yolo11 model
     2. Runs inference on the specified test image
     3. Extracts morphometric features from detected cells
     4. Displays results in a formatted table

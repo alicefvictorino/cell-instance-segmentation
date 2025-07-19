@@ -73,7 +73,7 @@ demo = gr.Interface(
         gr.Image(type="pil", label="Células segmentadas"),
         gr.Dataframe(label="Métricas Morfométricas")
     ],
-    title="🔬 Análise Morfométrica com YOLOv11",
+    title="🔬 Análise Morfométrica com yolo11",
     description="Faça upload de uma imagem de microscopia para segmentar células e obter métricas como área, perímetro, circularidade e razão de aspecto."
 )
 
