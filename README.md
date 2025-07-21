@@ -2,15 +2,11 @@
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg) ![YOLO11](https://img.shields.io/badge/YOLO11-ultralytics-red) ![License](https://img.shields.io/badge/license-MIT-green.svg) ![Status](https://img.shields.io/badge/status-Deployed-brightgreen)
 
-<p align="center">
-  <img src="assets/gradio_app_screenshot.png" alt="Interactive Application" width="800"/>
-</p>
 
 ## 🚀 Interactive Application
 
 👉 **[🔬 Access the Live Application Here](https://cell-segmentation.streamlit.app/)** 🚀
 
----
 
 ## 📑 Table of Contents
 - [Objective](#-objective)
@@ -22,13 +18,11 @@
 - [License](#-license)
 - [References](#-references)
 
----
-
 ## 🎯 Objective
 
-Manual analysis of microscopy images for cell identification and quantification is a **slow, subjective, and error-prone** process. This project offers an automated solution that aims to **automatize** individual cell detection and segmentation, and **extracts quantitative metrics** from images, such as area and perimeter (in pixels), circularity and elongation.
-
----
+Manual analysis of microscopy images for cell identification and quantification is a **slow, subjective, and error-prone** process. This project provides an automated solution for:
+* Individual cell detection and instance segmentation.
+* Extraction of quantitative morphological metrics (e.g., area, perimeter, circularity, aspect ratio) from segmented cells.
 
 ## 🚀 How to Run
 
@@ -45,79 +39,73 @@ This automated workflow will:
 4.  **Train the `yolo11s-seg` model** for 50 epochs.
 5.  **Save the final model** and all training results to your personal Google Drive for persistence.
 
----
-
 ## 📂 Project Structure
 
 ```
 cell-instance-segmentation/
 ├── 📁 app/
-│   ├── app.py          # Main script for the Gradio web interface.
-│   └── best.pt         # Trained model used by the Gradio application.
+│   ├── app.py          # Main script for the Streamlit web interface.
+│   └── best.pt         # Trained YOLO11s-seg model used by the application.
 ├── 📁 assets/
-│   └── ...             # Images and visual assets for the README.
+│   └── streamlit_app_screenshot.png # Screenshot of the Streamlit application
+│   └── results_training_graphs.jpg  # Training performance graphs
+│   └── confusion_matrix.png         # Normalized confusion matrix
 ├── 📁 scripts/
-│   ├── preprocess.py   # Converts RLE annotations to YOLO format.
-│   ├── train.py        # Trains the yolo11 model.
-│   └── analysis.py     # Performs morphometric analysis on segmented cells.
-├── main_workflow_kaggle.ipynb  # The reproducible workflow for the pipeline.
-├── requirements.txt      # Python dependencies for the project.
-└── README.md      
-└── LICENSE       
+│   ├── preprocess.py   # Converts RLE annotations to YOLO format
+│   ├── train.py        # Trains the YOLO model
+│   └── analysis.py     # Performs morphometric analysis on segmented cells
+├── main_workflow_kaggle.ipynb  # The reproducible workflow for the pipeline
+├── requirements.txt      # Python dependencies for the project
+└── README.md      
+└── LICENSE      
 ```
 
----
 
-## 📊 Results and Analysis
+## 📊 Model Performance
 
-To validate the model's effectiveness, an iterative training process was conducted. An initial baseline model was trained for 25 epochs, followed by a refined model trained for 100 epochs on a properly split dataset (80% train, 20% validation). The comparison clearly demonstrates the significant impact of longer, more structured training.
+The `yolo11s-seg` model was trained for instance segmentation on microscopy images. Training focused on optimizing mask prediction accuracy and cell classification.
 
-### Model Performance Comparison
+The following metrics represent the model's performance on the validation set after training:
 
-The evaluation on the validation set shows a substantial improvement in the refined model across all key metrics.
+| Metric          | YOLO11s-seg Performance |
+| :-------------- | :----------------------- |
+| **mAP50-95(M)** | **0.334**                |
+| **mAP50(M)**    | **0.638**                |
 
-| Metric          | Baseline Model (25 Epochs) | Refined Model (100 Epochs) | Improvement |
-| :-------------- | :------------------------- | :------------------------- | :---------- |
-| **mAP50-95(M)** | 0.17                       | **0.28**                   | **+65%**    |
-| **mAP50(M)**    | 0.52                       | **0.62**                   | **+19%**    |
+-   **mAP50-95(M) (Mean Average Precision @ 0.50-0.95 IoU for Masks):** **0.334**. This metric evaluates mask quality across various Intersection over Union (IoU) thresholds, from a loose 0.50 to a strict 0.95. A higher value indicates better mask prediction precision.
+-   **mAP50(M) (Mean Average Precision @ 0.50 IoU for Masks):** **0.638**. This metric specifically assesses mask overlap at an IoU threshold of 0.50. A value of **0.638** indicates that, with a 50% overlap criterion, the model correctly segments over 63% of the cells.
 
--   **mAP50-95(M):** This metric, which evaluates the precise quality of the mask overlap, saw a **65% increase**, moving from 0.17 to 0.28. This indicates that the refined model's masks are significantly more accurate.
--   **mAP50(M):** With a more flexible overlap criterion, the refined model correctly segments over 62% of the cells, a 10-point improvement.
-
-The training graphs below illustrate the stable learning process of the 100-epoch model, with consistently decreasing loss curves and ascending mAP curves.
+The training graphs below illustrate the model's learning process, showing decreasing loss curves and increasing mAP curves over epochs.
 
 <p align="center">
-  <img src="assets/results_100_epochs.png" alt="Training Graphs - 100 Epochs" width="900"/>
+  <img src="assets/results_training_graphs.png" alt="YOLO11s-seg Training Graphs" width="900"/>
   <br>
-  <em>Loss and precision graphs during the 100-epoch training run.</em>
+  <em>Loss and precision graphs during the YOLO11s-seg training run.</em>
 </p>
 
 ### Qualitative and Classification Analysis
 
-A comparison of the confusion matrices reveals the most significant improvement. The refined model is more effective at correctly identifying cell types and reduces the number of missed cells (false negatives classified as `background`).
+The confusion matrix provides insight into the model's classification performance:
 
-| Baseline Model (25 Epochs)                                                                      | Refined Model (100 Epochs)                                                                        |
-| :----------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
-| <img src="assets/confusion_matrix_25_epochs.png" alt="Confusion Matrix - 25 Epochs" width="400"/> | <img src="assets/confusion_matrix_100_epochs.png" alt="Confusion Matrix - 100 Epochs" width="400"/> |
+<p align="center">
+  <img src="assets/confusion_matrix_normalized.png" alt="YOLO11s-seg Confusion Matrix" width="400"/>
+</p>
 
--   **Reduction in Missed Detections:** The number of true cells misclassified as `background` dropped from **33,594** in the 25-epoch model to just **6,607** in the 100-epoch model. This is a **~80% reduction in false negatives**, proving the refined model is vastly superior at finding cells.
--   **Improved Classification Accuracy:** The diagonal of the 100-epoch matrix is much "cleaner," indicating fewer mistakes between cell types once they are detected.
-
----
+-   **False Negatives (Missed Detections):** The matrix indicates a low rate of true cells being misclassified as `background`, demonstrating the model's effectiveness in detecting cells.
+-   **Classification Accuracy:** The diagonal elements of the matrix show a high proportion of correctly classified cells across different types, indicating robust inter-class distinction.
 
 ## 🛠️ Technologies Used
 
-- **YOLO11-seg** - Instance segmentation model
+- **YOLO11s-seg** - Segmentation model
 - **PyTorch** - Deep learning framework
 - **Ultralytics** - YOLO library
 - **OpenCV** - Image processing
 - **Pandas & NumPy** - Data analysis
-- **Matplotlib** - Visualization
-- **Gradio** - Interactive web interface
+- **Plotly & Matplotlib** - Visualization
+- **Streamlit** - Interactive web interface
 - **Streamlit Community Cloud** - Deployment platform
 - **Google Colab** - Training environment
 
----
 
 ## 📚 About the Dataset
 
@@ -127,23 +115,14 @@ This project uses the **Sartorius Cell Instance Segmentation Dataset**, availabl
 - 🧬 **Multiple neurological cell types**
 - 📊 **Well-structured training and test data**
 
----
 
 ## 📄 License
 
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
----
 
 ## References
 
 -   **Sartorius - Cell Instance Segmentation (Kaggle Competition):**
     Howard, A., Chow, A., et al. (2021). *Sartorius - Cell Instance Segmentation*. Kaggle. Retrieved from https://kaggle.com/competitions/sartorius-cell-instance-segmentation
--   **Ultralytics yolo11 Documentation:**
-    -   Models: https://docs.ultralytics.com/pt/models/yolo11/
-    -   Segmentation Task: https://docs.ultralytics.com/pt/tasks/segment/#models
-
-
-
-
-
+- https://docs.ultralytics.com/tasks/segment/
