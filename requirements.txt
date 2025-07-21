@@ -20,3 +20,7 @@ pathlib2>=2.3.0
 
 gradio
 scikit-learn
+streamlit
+opencv-python-headless
+Pillow
+gdown
