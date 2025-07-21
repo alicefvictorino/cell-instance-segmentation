@@ -8,7 +8,7 @@
 
 ## 🚀 Interactive Application
 
-👉 **[🔬 Access the Live Application Here](https://huggingface.co/spaces/alicefvictorino/cell-segmentation-app)** 🚀
+👉 **[🔬 Access the Live Application Here](https://cell-segmentation.streamlit.app/)** 🚀
 
 ---
 
@@ -114,7 +114,7 @@ A comparison of the confusion matrices reveals the most significant improvement.
 - **Pandas & NumPy** - Data analysis
 - **Matplotlib** - Visualization
 - **Gradio** - Interactive web interface
-- **Hugging Face Spaces** - Deployment platform
+- **Streamlit Community Cloud** - Deployment platform
 - **Google Colab** - Training environment
 
 ---
