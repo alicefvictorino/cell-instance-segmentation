@@ -203,3 +203,5 @@ kaggle.json
 # dataset and YOLO training outputs
 /runs/
 /data/
+
+environment.yml

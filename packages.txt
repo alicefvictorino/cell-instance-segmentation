@@ -1,0 +1,6 @@
+libgl1-mesa-glx
+libsm6
+libxrender1
+libfontconfig1 # Adicional, pode ajudar com fontes se cv2 tiver dependência
+libice6        # Adicional, pode ajudar com dependências de X11
+libxext6       # Adicional, comum com libxrender1
