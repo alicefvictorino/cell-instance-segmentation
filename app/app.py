@@ -159,23 +159,34 @@ if uploaded_file is None:
         </div>
         """, unsafe_allow_html=True)
 else:
-    image = Image.open(uploaded_file)
-    
+    image = Image.open(uploaded_file).convert("RGB")
+
+    MAX_SIZE = 1024  
+    image.thumbnail((MAX_SIZE, MAX_SIZE))
+
     st.subheader("Uploaded Image Preview")
-    st.image(image, caption='Your Uploaded Image.', use_container_width=True)
-    
+    st.image(image, caption='Your Uploaded Image.', width=400)
+
     st.markdown("---")
     st.header("Analysis Results")
-    
-    # Image processing
+
+    img_np = np.array(image)
+
     with st.spinner('Segmenting cells and extracting metrics... This may take a moment.'):
         try:
-            results = model.predict(source=image, save=False, conf=confidence_threshold, verbose=False)
+            results = model.predict(
+                source=img_np,
+                save=False,
+                conf=confidence_threshold,
+                verbose=False,
+                device="cpu"
+            )
             result = results[0]
         except Exception as e:
             st.error(f"Error during segmentation: {e}")
             st.warning("Please check if the model is correct and the image is compatible.")
             st.stop()
+
 
         col_img_original, col_img_segmented = st.columns(2)
         with col_img_original:
