@@ -115,6 +115,16 @@ This project uses the **Sartorius Cell Instance Segmentation Dataset**, availabl
 - 🧬 **Multiple neurological cell types**
 - 📊 **Well-structured training and test data**
 
+## 👥 Project Team
+
+The development of the project was conducted for the Computer Vision course, taught by Professor [Helton Maia](https://heltonmaia.com/) at ECT/UFRN.
+
+
+ | [![](https://github.com/alicefvictorino.png?size=80)](https://github.com/alicefvictorino) | [![](https://github.com/heltonmaia.png?size=80)](https://github.com/heltonmaia) |
+ | :---------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: |
+ |                             **alicefvictorino** Researcher                              |                       **heltonmaia**  Supervising Professor                     |
+
+---
 
 ## 📄 License
 
